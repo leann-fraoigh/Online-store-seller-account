@@ -25,3 +25,7 @@
     Склонируйте репозиторий [Frontend-trainee-assignment-2024](https://gitverse.ru/avito.tech/tech-internship/content/main/Tech%20Internships%20/Frontend/Frontend-trainee-assignment-2024) и следуйте инструкциям по установке и запуску в [README.md](https://gitverse.ru/avito.tech/tech-internship/content/main/Tech%20Internships%20/Frontend/Frontend-trainee-assignment-2024/frontend-trainee-assignment-autumn-2024.md) проекта (пункты Перед запуском, Запуск сервера).
 
 ## Вопросы и проблемы
+
+* Ради скорости и эксперимента (не пользоваталсь раньше библиотеками компонентов) использую material UI. Хотела попробовать Ant Design, но там возникает конфликт с компонентами библиотеки роутинга, а material UI умеет это решать.
+  
+* Некоторые места в коде сопровождаются комментариями c префиксом **TODO:**, означающими, что конкретное место в коде требует проверки или доработки.

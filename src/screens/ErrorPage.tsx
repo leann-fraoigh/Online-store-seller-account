@@ -1,4 +1,6 @@
-import { isRouteErrorResponse, Link, useRouteError } from "react-router-dom";
+import { isRouteErrorResponse, Link as RouterLink, useRouteError } from "react-router-dom";
+
+import Link from '@mui/material/Link';
 
 function ErrorPage() {
   const error = useRouteError();
@@ -17,12 +19,13 @@ function ErrorPage() {
 
   return (
     <div id="error-page">
-      <h1>Ой...</h1>
       <p>Извините, возникла ошибка.</p>
       <p>
         <i>{errorMessage}</i>
       </p>
-      <Link to={`/`}>Вернуться на главную</Link>
+      <p>
+        <Link component={RouterLink} to="/">Вернуться на главную</Link>
+      </p>
     </div>
   );
 }
