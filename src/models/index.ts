@@ -19,8 +19,7 @@ export type Advertisement = {
 
 export type AdvertisementList = Advertisement[];
 
-
-const OrderStatus = {
+export const OrderStatus = {
   Created: 0,
   Paid: 1,
   Transport: 2,
@@ -30,10 +29,9 @@ const OrderStatus = {
   Refund: 6
 } as const;
 
-
 type OrderItem = Advertisement & { count: number; };
 
-type Order = {
+export type Order = {
   /* Уникальный идентификатор. */
   id: string;
   /* Статус. */
@@ -49,6 +47,8 @@ type Order = {
   /* Сумма заказа */
   total: number;
 }
+
+export type OrdersList = Order[];
 
 type Image = {
   /* Уникальный идентификатор. */

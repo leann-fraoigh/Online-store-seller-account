@@ -20,7 +20,7 @@ export default function AdCard(props: Props) {
   const color = grey[300];
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} variant="outlined">
       <CardActionArea component={Link} to={`/advertisements/:${id}`}>
         {/* TODO: Здесь стоит подумать, нужен ли нормальный плейсхолдер на случай, если картинки нет */}
         <CardMedia

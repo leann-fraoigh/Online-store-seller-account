@@ -24,7 +24,8 @@ import { loader as advertisementsLoader } from './screens/Advertisements/loader.
 import Advertisement from './screens/Advertisement';
 import { loader as advertisementLoader } from './screens/Advertisement/loader.ts';
 import Index from './screens/Index.tsx';
-import Orders from './screens/Orders.tsx';
+import Orders from './screens/Orders';
+import { loader as ordersLoader } from './screens/Orders/loader.ts';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -47,6 +48,7 @@ const router = createBrowserRouter(
       <Route
         path="orders"
         element={<Orders />}
+        loader={ordersLoader}
       />
 
     </Route>
