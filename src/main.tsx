@@ -3,27 +3,55 @@ import { createRoot } from 'react-dom/client';
 import {
   createBrowserRouter,
   RouterProvider,
+  createRoutesFromElements,
+  Route,
+
 } from "react-router-dom";
 
 // Стили
-import './assets/css/style.css';
+import './assets/css/index.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { CssBaseline } from '@mui/material';
 
-// Экраны приложения
-import Main from './screens/Main.tsx';
+// Экраны приложения и их лоадеры
+import Root from './screens/Root.tsx';
 import ErrorPage from './screens/ErrorPage.tsx';
+import Advertisements from './screens/Advertisements';
+import { loader as advertisementsLoader } from './screens/Advertisements/loader.ts';
+import Advertisement from './screens/Advertisement';
+import { loader as advertisementLoader } from './screens/Advertisement/loader.ts';
+import Index from './screens/Index.tsx';
+import Orders from './screens/Orders.tsx';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Main />,
-    errorElement: <ErrorPage />,
-  },
-]);
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route
+      path="/"
+      element={<Root />}
+      errorElement={<ErrorPage />}
+    >
+      <Route index element={<Index/>} />
+      <Route
+        path="advertisements"
+        element={<Advertisements />}
+        loader={advertisementsLoader}
+      />
+      <Route
+        path="advertisements/:advertisementId"
+        element={<Advertisement />}
+        loader={advertisementLoader}
+      />
+      <Route
+        path="orders"
+        element={<Orders />}
+      />
+
+    </Route>
+  )
+);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

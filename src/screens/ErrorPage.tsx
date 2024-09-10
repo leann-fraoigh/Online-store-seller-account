@@ -1,11 +1,10 @@
 import { isRouteErrorResponse, Link as RouterLink, useRouteError } from "react-router-dom";
 
+// UI
 import Link from '@mui/material/Link';
 
-function ErrorPage() {
+export default function ErrorPage() {
   const error = useRouteError();
-  console.log(error);
-  console.error(error);
   let errorMessage;
   if (isRouteErrorResponse(error)) {
     errorMessage = `${error.status} ${error.statusText}`;
@@ -29,5 +28,3 @@ function ErrorPage() {
     </div>
   );
 }
-
-export default ErrorPage;
