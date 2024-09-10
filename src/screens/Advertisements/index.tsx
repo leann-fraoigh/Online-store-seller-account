@@ -37,7 +37,7 @@ export default function Advertisements() {
           labelId="demo-select-small-label"
           id="demo-select-small"
           value={limit.toString()}
-          label="Age"
+          label="number"
           onChange={handleLimitChange}
         > 
           {/* TODO: Эти данные можно вынести куда-то, чтобы из них формировать список опций, и чтобы оттуда же бралось дефолтное число для лоадера, чтобы оно точно совпадало с одной из опций */}

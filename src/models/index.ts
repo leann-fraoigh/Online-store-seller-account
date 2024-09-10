@@ -29,6 +29,8 @@ export const OrderStatus = {
   Refund: 6
 } as const;
 
+export type OrderStatusKeyType = keyof typeof OrderStatus;
+
 type OrderItem = Advertisement & { count: number; };
 
 export type Order = {

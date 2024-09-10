@@ -7,15 +7,17 @@ import { Order } from '../models';
 import { Card, CardContent, Typography, CardActions, Button } from '@mui/material';
 import { CurrencyRuble, Check, CalendarMonth } from '@mui/icons-material';
 
-const translatedStatuses = [
-  'Создан',        // 0 - Created
-  'Оплачен',       // 1 - Paid
-  'В пути',        // 2 - Transport
-  'Доставлен в пункт', // 3 - DeliveredToThePoint
-  'Получен',       // 4 - Received
-  'Архивирован',   // 5 - Archived
-  'Возврат'        // 6 - Refund
-];
+const statusMap = {
+  0: 'Создан',
+  1: 'Оплачен',
+  2: 'В пути',
+  3: 'Доставлен в пункт',
+  4: 'Получен',
+  5: 'Архивирован',
+  6: 'Возврат'
+};
+
+const translatedStatuses = Object.values(statusMap);
 
 interface Props {
   order: Order;
