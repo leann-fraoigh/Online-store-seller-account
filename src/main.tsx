@@ -21,6 +21,7 @@ import Root from './screens/Root.tsx';
 import ErrorPage from './screens/ErrorPage.tsx';
 import Advertisements from './screens/Advertisements';
 import { loader as advertisementsLoader } from './screens/Advertisements/loader.ts';
+import { action as advertisementsAction } from './screens/Advertisements/action.ts';
 import Advertisement from './screens/Advertisement';
 import { loader as advertisementLoader } from './screens/Advertisement/loader.ts';
 import Index from './screens/Index.tsx';
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
         path="advertisements"
         element={<Advertisements />}
         loader={advertisementsLoader}
+        action={advertisementsAction}
       />
       <Route
         path="advertisements/:advertisementId"

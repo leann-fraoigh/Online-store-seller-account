@@ -7,7 +7,7 @@ export type loaderData = {
 }
 
 export async function loader({ params }: LoaderFunctionArgs) {
-  const id = parseInt(params.advertisementId?.slice(1) || '1', 10);
+  const id = params.advertisementId?.slice(1) || '1';
 
   const response = await getAdvertisement(id);
 

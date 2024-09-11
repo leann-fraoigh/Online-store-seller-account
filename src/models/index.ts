@@ -17,6 +17,8 @@ export type Advertisement = {
   imageUrl?: string;
 }
 
+export type AdvertisementNew = Omit<Advertisement, 'id'>;
+
 export type AdvertisementList = Advertisement[];
 
 export const OrderStatus = {

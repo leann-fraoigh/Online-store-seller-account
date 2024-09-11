@@ -1,7 +1,7 @@
 import { APIRoute } from './const';
 import { Advertisement } from '../models';
 
-export async function getAdvertisement(id: number, signal?: AbortSignal): Promise<Advertisement | void> {
+export async function getAdvertisement(id: string, signal?: AbortSignal): Promise<Advertisement | void> {
   const apiUrl = new URL(APIRoute.Advertisement);
   const response = await fetch(`${apiUrl}/${id}`, { signal });
 
