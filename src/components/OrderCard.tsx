@@ -21,6 +21,7 @@ const translatedStatuses = Object.values(statusMap);
 
 interface Props {
   order: Order;
+  onClick: (ads: number[]) => void;
 }
 
 export default function OrderCard(props: Props) {
@@ -30,6 +31,12 @@ export default function OrderCard(props: Props) {
     (acc, value) => acc + value.count,
     0,
   );
+
+  const getAdvertisementsId = items.reduce((acc: number[], value) => {
+    acc.push(parseInt(value.id, 10));
+    return acc;
+  }, [] as number[]);
+
 
   return (
     <Card variant="outlined" sx={{ borderColor: finishedAt ? 'green' : '', minHeight:250, display:"flex", flexDirection:"column", justifyContent:"space-between" }} >
@@ -67,7 +74,7 @@ export default function OrderCard(props: Props) {
         }
       </CardContent>
       <CardActions>
-        <Button size="small">Показать все товары</Button>
+        <Button size="small" onClick={() => {props.onClick(getAdvertisementsId)}}>Показать все товары</Button>
       </CardActions>
     </Card>
   );

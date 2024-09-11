@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs   } from "react-router-dom";
-import { getAdvertisements } from "../../api/get-advertisements";
+import { getAdvertisementsByRange } from "../../api/get-advertisements-by-range";
 import { AdvertisementList } from '../../models';
 
 export type loaderData = {
@@ -14,7 +14,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const limit = parseInt(url.searchParams.get("limit") || '10', 10);
   const start = (page - 1) * limit;
 
-  const response = await getAdvertisements(start, limit);
+  const response = await getAdvertisementsByRange(start, limit);
 
   return { items: response, page, limit };
 }
