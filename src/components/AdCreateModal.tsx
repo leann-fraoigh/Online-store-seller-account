@@ -10,6 +10,7 @@ const style = {
   top: '50%',
   left: '50%',
   width: '90%',
+  maxWidth: '600px',
   gap: 2.5,
   transform: 'translate(-50%, -50%)',
   bgcolor: 'background.paper',
@@ -39,9 +40,10 @@ export default function AdCreateModal(props: Props) {
           sx={ style }
         >
           <Typography id="create-ad-modal-title" gutterBottom variant="h5" component="h4" sx={{ width: '100%', mb: 0.5 }}>Создание нового объявления</Typography>
-          <TextField id="name" label="Название" variant="standard" name='name' />
+          <TextField id="name" label="Название" variant="standard" name='name' required />
           {/* TODO: Авторы библиотеки предупреждают, что type="number может порождать баги (https://mui.com/material-ui/react-text-field/#type-quot-number-quot). Нужно будет заменить его или присматривать за ним. */}
-          <TextField id="price" label="Цена" variant="standard" type="number" name='price' />
+          {/* TODO: Доделать валидацию для обязательных полей */}
+          <TextField id="price" label="Цена" variant="standard" type="number" name='price' required />
           <TextField id="imageUrl" label="Фото (введите ссылку)" variant="standard" name='imageUrl'/>
           <TextField
             id="description"
@@ -52,7 +54,7 @@ export default function AdCreateModal(props: Props) {
             name="description"
           />
           {state !== 'idle' ? (
-            <Button size="small" variant="contained" sx={{ width: 'auto', alignSelf: 'center' }} type='submit' disabled={state === 'loading'} >Опубликовать</Button>
+            <Button size="small" variant="contained" sx={{ width: 'auto', alignSelf: 'center', mt: 0.5 }} type='submit' disabled={state === 'loading'} >Опубликовать</Button>
           ) : ( 
             <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
               Объявление опубликовано.
