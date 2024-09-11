@@ -8,6 +8,10 @@ import { Card, CardContent, CardMedia, Typography, CardActionArea } from '@mui/m
 import { Visibility, Favorite, CurrencyRuble } from '@mui/icons-material';
 import { grey } from '@mui/material/colors';
 
+const spanWithIconStyle = {
+  display: 'flex',
+  alignItems: 'center',
+}
 
 interface Props {
   advertisement: Advertisement;
@@ -34,11 +38,12 @@ export default function AdCard(props: Props) {
           <Typography gutterBottom variant="h6" component="h3">
             {name}
           </Typography>
-          <Typography variant="body1" gutterBottom>
+          <Typography variant="body1" gutterBottom >
             <CurrencyRuble fontSize='inherit'/>{price}
           </Typography>
           <Typography variant="body2" gutterBottom display={'flex'} gap={1}>
-            <span><Visibility fontSize='inherit'/><span className='sr-only'>Число просмотров</span> {views}</span> <span><Favorite fontSize='inherit'/><span className='sr-only'>Число лайков</span> {likes}</span>
+            <span style={spanWithIconStyle}><Visibility fontSize='inherit' /><span className='sr-only'>Число просмотров</span> {views}</span>
+            <span style={spanWithIconStyle}><Favorite fontSize='inherit'/><span className='sr-only'>Число лайков</span> {likes}</span>
           </Typography>
         </CardContent>
       </CardActionArea>
