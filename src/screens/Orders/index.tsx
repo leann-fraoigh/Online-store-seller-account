@@ -93,6 +93,7 @@ export default function Orders() {
 
   return (
     <>
+      <Typography gutterBottom variant="h5" component="h2">Мои заказы</Typography>      
       <Box sx={{ display: 'flex', flexDirection:'column' }}>
         <FormControl variant="standard" sx={{ m: 1, mb: 1, maxWidth: 175 }} size="small" >
           <InputLabel id="demo-select-small-label">Сортировать по сумме заказа</InputLabel>
@@ -162,7 +163,6 @@ export default function Orders() {
           </FormGroup>
         </FormControl>
       </Box>
-      <Typography gutterBottom variant="h5" component="h2">Мои заказы</Typography>      
       <OrderList orders={filteredAndSortedItems} />
     </>
   )

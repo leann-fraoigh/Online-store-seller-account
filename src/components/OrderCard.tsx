@@ -47,7 +47,7 @@ export default function OrderCard(props: Props) {
           <span className='sr-only'>Номер заказа</span>№{id}
 
           {/* Дата создания */}
-          <span><CalendarMonth fontSize='inherit' /> <span className='sr-only'>Дата создания</span>{formatDate(createdAt)}</span>
+          <span><CalendarMonth fontSize='inherit' sx={{ mb: -0.25}} /> <span className='sr-only'>Дата создания</span>{formatDate(createdAt)}</span>
         </Typography>
 
         {/* Стоимость */}

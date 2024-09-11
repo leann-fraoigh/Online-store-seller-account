@@ -24,7 +24,7 @@ export default function AdCard(props: Props) {
   const color = grey[300];
 
   return (
-    <Card sx={{ maxWidth: 345 }} variant="outlined">
+    <Card sx={{ maxWidth: 400 }} variant="outlined">
       <CardActionArea component={Link} to={`/advertisements/:${id}`}>
         {/* TODO: Здесь стоит подумать, нужен ли нормальный плейсхолдер на случай, если картинки нет */}
         <CardMedia
@@ -42,8 +42,8 @@ export default function AdCard(props: Props) {
             <CurrencyRuble fontSize='inherit'/>{price}
           </Typography>
           <Typography variant="body2" gutterBottom display={'flex'} gap={1}>
-            <span style={spanWithIconStyle}><Visibility fontSize='inherit' /><span className='sr-only'>Число просмотров</span> {views}</span>
-            <span style={spanWithIconStyle}><Favorite fontSize='inherit'/><span className='sr-only'>Число лайков</span> {likes}</span>
+            <span style={spanWithIconStyle}><Visibility fontSize='inherit' color='action'/><span className='sr-only'>Число просмотров</span> {views}</span>
+            <span style={spanWithIconStyle}><Favorite fontSize='inherit' color='action' /><span className='sr-only'>Число лайков</span> {likes}</span>
           </Typography>
         </CardContent>
       </CardActionArea>

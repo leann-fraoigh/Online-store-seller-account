@@ -12,7 +12,7 @@ export default function Root() {
       <nav>
         <ol role="list">
           {/* TODO: Сделать подсветку активных ссылок */}
-          <li><Link component={NavLink} underline="hover" to="/advertisements">Объявления</Link></li>
+          <li><Link component={NavLink} underline="hover" to="/advertisements" >Объявления</Link></li>
           <li><Link component={NavLink} underline="hover" to="/orders">Заказы</Link></li>
         </ol>
       </nav>

@@ -1,11 +1,22 @@
 @import url("reset.css");
 @import url("global.css");
 
+/* TODO: Переписать на соврменный синтаксис (нативный нестинг) или добавить препроцессор */
 nav ol {
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;
   gap: 1em;
+}
+
+nav a {
+  display: block;
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+nav a.active {
+  background-color: rgba(25, 118, 210, 0.1);
 }
 
 .overlay {
@@ -14,9 +25,9 @@ nav ol {
   transition: opacity 0.2s ease-in-out;
   background-color: #fff;
   opacity: 1;
+}
 
-  &.loading {
-    opacity: 0.5;
-    pointer-events: none;
-  }
+.overlay.loading {
+  opacity: 0.5;
+  pointer-events: none;
 }
