@@ -5,20 +5,25 @@ import { Check as CheckIcon } from '@mui/icons-material';
 // Типы
 import { Advertisement } from '../models';
 
-const style = {
-  position: 'absolute' as const,
+const containerStyle = {
   display: 'flex',
   flexDirection: 'column',
+  gap: 2.5,
+};
+
+const wrapperStyle = {
+  position: 'absolute' as const,
   top: '50%',
   left: '50%',
   width: '90%',
   maxWidth: '600px',
-  gap: 2.5,
+  maxHeight: '90vh',
   transform: 'translate(-50%, -50%)',
   bgcolor: 'background.paper',
   boxShadow: 24,
   p: 4,
-};
+  overflow: 'auto',
+}
 
 interface Props {
   onClose: () => void;
@@ -48,31 +53,33 @@ export default function AdModal(props: Props) {
       <fetcher.Form method={method} action='#' >
         <Box
           component="div"
-          sx={ style }
+          sx={ wrapperStyle }
         >
-          <Typography id="create-ad-modal-title" gutterBottom variant="h5" component="h4" sx={{ width: '100%', mb: 0.5 }}>{text.title}</Typography>
-          <TextField id="name" label="Название" variant="standard" name='name' defaultValue={name} required />
-          {/* TODO: Авторы библиотеки предупреждают, что type="number может порождать баги (https://mui.com/material-ui/react-text-field/#type-quot-number-quot). Нужно будет заменить его или присматривать за ним. */}
-          {/* TODO: Доделать валидацию для обязательных полей */}
-          <TextField id="price" label="Цена" variant="standard" type="number" name='price' defaultValue={price} required />
-          <TextField id="imageUrl" label="Фото (введите ссылку)" variant="standard" name='imageUrl'defaultValue={imageUrl} />
-          <TextField
-            id="description"
-            label="Описание"
-            multiline
-            variant="standard"
-            name="description"
-            defaultValue={description}
-            maxRows={15}
-          />
-          {state !== 'success' ? (
-            <Button size="small" variant="contained" sx={{ width: 'auto', alignSelf: 'center', mt: 0.5 }} type='submit' disabled={state === 'submitting'} >{text.callToAction}</Button>
-          ) : ( 
-            <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-              {text.successMessage}
-            </Alert>
-          )}
-        </Box>
+          <Box sx={ containerStyle }>
+            <Typography id="create-ad-modal-title" gutterBottom variant="h5" component="h4" sx={{ width: '100%', mb: 0.5 }}>{text.title}</Typography>
+            <TextField id="name" label="Название" variant="standard" name='name' defaultValue={name} required />
+            {/* TODO: Авторы библиотеки предупреждают, что type="number может порождать баги (https://mui.com/material-ui/react-text-field/#type-quot-number-quot). Нужно будет заменить его или присматривать за ним. */}
+            {/* TODO: Доделать валидацию для обязательных полей */}
+            <TextField id="price" label="Цена" variant="standard" type="number" name='price' defaultValue={price} required />
+            <TextField id="imageUrl" label="Фото (введите ссылку)" variant="standard" name='imageUrl'defaultValue={imageUrl} />
+            <TextField
+              id="description"
+              label="Описание"
+              multiline
+              variant="standard"
+              name="description"
+              defaultValue={description}
+              maxRows={15}
+            />
+            {state !== 'success' ? (
+              <Button size="small" variant="contained" sx={{ width: 'auto', alignSelf: 'center', mt: 0.5 }} type='submit' disabled={state === 'submitting'} >{text.callToAction}</Button>
+            ) : ( 
+              <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+                {text.successMessage}
+              </Alert>
+            )}
+          </Box>
+        </Box>  
       </fetcher.Form>
     </Modal>
   );
