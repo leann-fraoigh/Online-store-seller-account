@@ -17,7 +17,7 @@ export default function Advertisements() {
   const [currentPage, setCurrentPage] = useState(initialPage);
   const setSearchParams = useSearchParams()[1];
   const [modalOpen, setModalOpen] = useState(false);
-  const [uploadingState, setUploadingState] = useState<'loading' | 'idle' | null >(null);
+  const [modalState, setModalState] = useState<'success' | 'initial' | 'submitting' >('initial');
   const fetcher = useFetcher();
 
   const handleModalOpen = () => {
@@ -26,7 +26,6 @@ export default function Advertisements() {
 
   const handleModalClose = () => {
     setModalOpen(false);
-    setUploadingState(null);
   };
 
   const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
@@ -39,14 +38,16 @@ export default function Advertisements() {
 
   useEffect(() => {
     switch (fetcher.state) {
-      case 'idle': {
-        setUploadingState('idle');
-        setTimeout(handleModalClose, 1000);
+      case 'submitting': {
+        setModalState('submitting');
         return;
       }
-      case 'loading':
-      case 'submitting': {
-        setUploadingState('loading');
+      case 'loading': {
+        setModalState('success');
+        setTimeout(() => {
+          handleModalClose();
+          setModalState('initial');
+        }, 1000);
         return;
       }
     }
@@ -82,7 +83,7 @@ export default function Advertisements() {
       {/* Пагинация */}
       <Pagination currentPage={currentPage} pagesCount={PAGES_COUNT} onChange={handlePageChange}/>
       {/* Модалка */}
-      <AdCreateModal isOpen={modalOpen} onClose={handleModalClose} fetcher={fetcher} state={uploadingState} />
+      <AdCreateModal isOpen={modalOpen} onClose={handleModalClose} fetcher={fetcher} state={modalState} />
     </>
   )
 }

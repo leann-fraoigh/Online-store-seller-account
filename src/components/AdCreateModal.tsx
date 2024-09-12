@@ -22,7 +22,7 @@ interface Props {
   onClose: () => void;
   isOpen: boolean;
   fetcher: FetcherWithComponents<never>;
-  state: 'loading' | 'idle' | null;
+  state: 'success' | 'initial' | 'submitting';
 }
 
 export default function AdCreateModal(props: Props) {
@@ -53,8 +53,8 @@ export default function AdCreateModal(props: Props) {
             variant="standard"
             name="description"
           />
-          {state !== 'idle' ? (
-            <Button size="small" variant="contained" sx={{ width: 'auto', alignSelf: 'center', mt: 0.5 }} type='submit' disabled={state === 'loading'} >Опубликовать</Button>
+          {state !== 'success' ? (
+            <Button size="small" variant="contained" sx={{ width: 'auto', alignSelf: 'center', mt: 0.5 }} type='submit' disabled={state === 'submitting'} >Опубликовать</Button>
           ) : ( 
             <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
               Объявление опубликовано.
