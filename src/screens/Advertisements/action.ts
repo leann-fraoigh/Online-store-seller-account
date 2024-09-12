@@ -4,7 +4,7 @@ import { AdvertisementNew } from "../../models";
 
 export async function action({ request }: ActionFunctionArgs) {
   switch (request.method) {
-    case "PUT": {
+    case "POST": {
       const dateNow = new Date().toISOString();
       const formData = await request.formData();
       const formObject = Object.fromEntries(formData.entries());

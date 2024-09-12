@@ -34,7 +34,7 @@ export default function AdCreateModal(props: Props) {
       onClose={onClose}
       aria-labelledby="create-ad-modal-title"
     > 
-      <fetcher.Form method='PUT' action='#' >
+      <fetcher.Form method='POST' action='#' >
         <Box
           component="div"
           sx={ style }
