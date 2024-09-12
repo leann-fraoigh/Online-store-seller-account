@@ -11,12 +11,9 @@ import AdModal from "../../components/AdModal";
 import { InputLabel, MenuItem, FormControl, Select, SelectChangeEvent, Typography, Button, Box } from '@mui/material';
 
 export default function Advertisements() {
-  // TODO: Убрать хардкод, см. комментарий в README.
-  const PAGES_COUNT = 10;
-
-  const { items, page: initialPage, limit: initialLimit } = useLoaderData() as loaderData;
+  const { items, page, limit: initialLimit, pagesCount } = useLoaderData() as loaderData;
   const [limit, setLimit] = useState(initialLimit);
-  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [currentPage, setCurrentPage] = useState(page);
   const setSearchParams = useSearchParams()[1];
   const fetcher = useFetcher();
   const { modalOpen, modalState, handleModalOpen, handleModalClose } = useModalWithFetcher(fetcher);
@@ -30,7 +27,7 @@ export default function Advertisements() {
   };
 
   useEffect(() => {
-    setSearchParams({ page: currentPage.toString(), limit: limit.toString() });
+    setSearchParams({ _page: currentPage.toString(), _per_page: limit.toString() });
   }, [limit, currentPage, setSearchParams])
 
   return (
@@ -57,7 +54,7 @@ export default function Advertisements() {
       </FormControl>
       <AdList advertisements={items} />
       {/* Пагинация */}
-      <Pagination currentPage={currentPage} pagesCount={PAGES_COUNT} onChange={handlePageChange}/>
+      <Pagination currentPage={currentPage} pagesCount={pagesCount} onChange={handlePageChange}/>
       {/* Модалка */}
       <AdModal method="POST" isOpen={modalOpen} onClose={handleModalClose} fetcher={fetcher} state={modalState} />
     </>
