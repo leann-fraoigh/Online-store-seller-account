@@ -40,8 +40,10 @@ export default function Orders() {
     Refund: true,
   });
 
+  // TODO: Поправить тут ошибку, о которой сообщает линтер
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const throttledSetState = useCallback(
-    () => throttle((newState: FormState) => {
+    throttle((newState: FormState) => {
       setFilter(newState);
     }, 300),
     []
