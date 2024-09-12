@@ -22,6 +22,7 @@ import { loader as advertisementsLoader } from './screens/Advertisements/loader.
 import { action as advertisementsAction } from './screens/Advertisements/action.ts';
 import Advertisement from './screens/Advertisement';
 import { loader as advertisementLoader } from './screens/Advertisement/loader.ts';
+import { action as advertisementAction } from './screens/Advertisement/action.ts';
 import Index from './screens/Index.tsx';
 import Orders from './screens/Orders';
 import { loader as ordersLoader } from './screens/Orders/loader.ts';
@@ -44,6 +45,7 @@ const router = createBrowserRouter(
         path="advertisements/:advertisementId"
         element={<Advertisement />}
         loader={advertisementLoader}
+        action={advertisementAction}
       />
       <Route
         path="orders"

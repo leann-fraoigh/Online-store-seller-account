@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useLoaderData, useSearchParams, useFetcher } from "react-router-dom";
 import { loaderData } from "./loader";
+// Кастомные хуки
+import { useModalWithFetcher } from "../../hooks/useModalWithFetcher";
 // Компоненты
 import AdList from "../../components/AdList";
 import Pagination  from "../../components/Pagination";
-import AdCreateModal from "../../components/AdCreateModal";
+import AdModal from "../../components/AdModal";
 // UI
 import { InputLabel, MenuItem, FormControl, Select, SelectChangeEvent, Typography, Button, Box } from '@mui/material';
 
@@ -16,17 +18,8 @@ export default function Advertisements() {
   const [limit, setLimit] = useState(initialLimit);
   const [currentPage, setCurrentPage] = useState(initialPage);
   const setSearchParams = useSearchParams()[1];
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalState, setModalState] = useState<'success' | 'initial' | 'submitting' >('initial');
   const fetcher = useFetcher();
-
-  const handleModalOpen = () => {
-    setModalOpen(true);
-  }
-
-  const handleModalClose = () => {
-    setModalOpen(false);
-  };
+  const { modalOpen, modalState, handleModalOpen, handleModalClose } = useModalWithFetcher(fetcher);
 
   const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value);
@@ -35,23 +28,6 @@ export default function Advertisements() {
   const handleLimitChange = (event: SelectChangeEvent) => {
     setLimit(+event.target.value);
   };
-
-  useEffect(() => {
-    switch (fetcher.state) {
-      case 'submitting': {
-        setModalState('submitting');
-        return;
-      }
-      case 'loading': {
-        setModalState('success');
-        setTimeout(() => {
-          handleModalClose();
-          setModalState('initial');
-        }, 1000);
-        return;
-      }
-    }
-  }, [fetcher])
 
   useEffect(() => {
     setSearchParams({ page: currentPage.toString(), limit: limit.toString() });
@@ -83,7 +59,7 @@ export default function Advertisements() {
       {/* Пагинация */}
       <Pagination currentPage={currentPage} pagesCount={PAGES_COUNT} onChange={handlePageChange}/>
       {/* Модалка */}
-      <AdCreateModal isOpen={modalOpen} onClose={handleModalClose} fetcher={fetcher} state={modalState} />
+      <AdModal method="POST" isOpen={modalOpen} onClose={handleModalClose} fetcher={fetcher} state={modalState} />
     </>
   )
 }

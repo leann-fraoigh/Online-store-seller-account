@@ -19,6 +19,8 @@ export interface Advertisement {
 
 export type AdvertisementNew = Omit<Advertisement, 'id'>;
 
+export type AdvertisementPatch = Omit<Advertisement, 'id' | 'createdAt' | 'views' | 'likes' >;
+
 export type AdvertisementList = Advertisement[];
 
 export const OrderStatus = {
