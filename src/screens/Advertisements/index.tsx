@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useLoaderData, useSearchParams, useFetcher } from "react-router-dom";
 import { loaderData } from "./loader";
+// Хелперы
+import { throttle } from "../../helpers/trorrle";
 // Кастомные хуки
 import { useModalWithFetcher } from "../../hooks/useModalWithFetcher";
 // Компоненты
@@ -8,7 +10,7 @@ import AdList from "../../components/AdList";
 import Pagination  from "../../components/Pagination";
 import AdModal from "../../components/AdModal";
 // UI
-import { InputLabel, MenuItem, FormControl, Select, SelectChangeEvent, Typography, Button, Box } from '@mui/material';
+import { InputLabel, MenuItem, FormControl, Select, SelectChangeEvent, Typography, Button, Box, TextField } from '@mui/material';
 
 export default function Advertisements() {
   const { items, page, limit: initialLimit, pagesCount } = useLoaderData() as loaderData;
@@ -17,18 +19,39 @@ export default function Advertisements() {
   const setSearchParams = useSearchParams()[1];
   const fetcher = useFetcher();
   const { modalOpen, modalState, handleModalOpen, handleModalClose } = useModalWithFetcher(fetcher);
+  const [nameFilter, setNameFilter] = useState<string>("");
 
   const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value);
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    throttledSearch(event.target.value);
   };
 
   const handleLimitChange = (event: SelectChangeEvent) => {
     setLimit(+event.target.value);
   };
 
+  // TODO: Поправить тут ворниг линтера
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const throttledSearch = useCallback(
+    throttle((value: string) => {
+      setNameFilter(value);
+    }, 1500),
+    []
+  );
+
   useEffect(() => {
-    setSearchParams({ _page: currentPage.toString(), _per_page: limit.toString() });
-  }, [limit, currentPage, setSearchParams])
+    const searchParams: Record<string, string | string[]> = {
+      _page: currentPage.toString(),
+      _per_page: limit.toString(),
+    }
+    if (nameFilter.length > 0) {
+      searchParams.name = nameFilter.toString();
+    }
+    setSearchParams(searchParams);
+  }, [limit, currentPage, nameFilter, setSearchParams])
 
   return (
     <>
@@ -37,9 +60,9 @@ export default function Advertisements() {
         <Button size="small" variant="outlined" onClick={handleModalOpen} >Создать новое объявление</Button>
       </Box>
       <FormControl variant="standard" sx={{ m: 1, mb: 3, minWidth: 200 }} size="small" >
-        <InputLabel id="demo-select-small-label">Объявлений на странице</InputLabel>
+        <InputLabel id="ads-select">Объявлений на странице</InputLabel>
         <Select
-          labelId="demo-select-small-label"
+          labelId="ads-select"
           id="demo-select-small"
           value={limit.toString()}
           label="number"
@@ -52,6 +75,14 @@ export default function Advertisements() {
           <MenuItem value={50}>50</MenuItem>
         </Select>
       </FormControl>
+      <TextField
+          id="standard-helperText"
+          label="Поиск по подному названию"
+          variant="standard"
+          size="small"
+          sx={{ m: 1, mb: 3, minWidth: 200 }}
+          onChange={handleSearchChange}
+        />
       <AdList advertisements={items} />
       {/* Пагинация */}
       <Pagination currentPage={currentPage} pagesCount={pagesCount} onChange={handlePageChange}/>

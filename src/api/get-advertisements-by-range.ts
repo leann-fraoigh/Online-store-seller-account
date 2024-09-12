@@ -11,11 +11,14 @@ interface ApiResponse {
   data: AdvertisementList;
 }
 
-export async function getAdvertisementsByRange(page?: number, limit?: number): Promise<ApiResponse | void> {
+export async function getAdvertisementsByRange(page?: number, limit?: number, name?: string): Promise<ApiResponse | void> {
   const apiUrl = new URL(`${APIRoute.Advertisement}`);
-  if (page !== undefined && limit !== undefined) {
+  if (page && limit) {
     apiUrl.searchParams.set('_page', page.toString());
     apiUrl.searchParams.set('_per_page', limit.toString());
+  }
+  if (name && name.length > 0) {
+    apiUrl.searchParams.set('name', name);
   }
   const response = await fetch(apiUrl);
   const responseJson = await response.json() as ApiResponse;

@@ -13,8 +13,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const page = parseInt(url.searchParams.get("_page") ?? '1', 10);
   const limit = parseInt(url.searchParams.get("_per_page") ?? '10', 10);
+  const name = url.searchParams.get("name")?.toString();
 
-  const response = await getAdvertisementsByRange(page, limit);
+  const response = await getAdvertisementsByRange(page, limit, name);
   
   if (response ) {
     console.log(response.data);
