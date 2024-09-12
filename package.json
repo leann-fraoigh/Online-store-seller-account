@@ -8,6 +8,9 @@
     "build": "tsc -b && vite build",
     "lint:test": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
+    "vitest:test": "vitest run",
+    "vitest:watch": "vitest watch",
+    "test": "npm run lint:test && npm run vitest:test",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -32,6 +35,7 @@
     "globals": "^15.9.0",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vitest": "^2.1.0"
   }
 }
