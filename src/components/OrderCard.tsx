@@ -21,7 +21,7 @@ const translatedStatuses = Object.values(statusMap);
 
 interface Props {
   order: Order;
-  onClick: (ads: number[]) => void;
+  onClick: (ads: string[]) => Promise<void>;
 }
 
 export default function OrderCard(props: Props) {
@@ -32,10 +32,10 @@ export default function OrderCard(props: Props) {
     0,
   );
 
-  const getAdvertisementsId = items.reduce((acc: number[], value) => {
-    acc.push(parseInt(value.id, 10));
+  const getAdvertisementsId = items.reduce((acc: string[], value) => {
+    acc.push(value.id);
     return acc;
-  }, [] as number[]);
+  }, [] as string[]);
 
 
   return (
@@ -47,7 +47,7 @@ export default function OrderCard(props: Props) {
           <span className='sr-only'>Номер заказа</span>№{id}
 
           {/* Дата создания */}
-          <span><CalendarMonth fontSize='inherit' sx={{ mb: -0.25}} /> <span className='sr-only'>Дата создания</span>{formatDate(createdAt)}</span>
+          <span><CalendarMonth fontSize='inherit' sx={{ mb: -0.25}} />&nbsp;<span className='sr-only'>Дата создания</span>{formatDate(createdAt)}</span>
         </Typography>
 
         {/* Стоимость */}
@@ -74,7 +74,8 @@ export default function OrderCard(props: Props) {
         }
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => {props.onClick(getAdvertisementsId)}}>Показать все товары</Button>
+        {/* TODO: Тут линтер ругался на необработанный промис, возможно, стоит решить по-другому */}
+        <Button size="small" onClick={() => {void props.onClick(getAdvertisementsId)}}>Показать все товары</Button>
       </CardActions>
     </Card>
   );

@@ -12,6 +12,16 @@ import { Typography, FormGroup, FormControlLabel, Checkbox, FormControl, Box, Fo
 
 type SortOrder = 'ascending' | 'descending';
 
+interface FormState {
+  Created: boolean;
+  Paid: boolean;
+  Transport: boolean;
+  DeliveredToThePoint: boolean;
+  Received: boolean;
+  Archived: boolean;
+  Refund: boolean;
+};
+
 export default function Orders() {
   // TODO: Во всем компоненте напрашивается лучшая типизация по статусам.
   const { items } = useLoaderData() as loaderData;
@@ -20,7 +30,7 @@ export default function Orders() {
 
   const [selectAll, setSelectAll] = useState(true);
 
-  const [filter, setFilter] = useState<Record<OrderStatusKeyType, boolean>>({
+  const [filter, setFilter] = useState<FormState>({
     Created: true,
     Paid: true,
     Transport: true,
@@ -31,7 +41,7 @@ export default function Orders() {
   });
 
   const throttledSetState = useCallback(
-    throttle((newState: any) => {
+    () => throttle((newState: FormState) => {
       setFilter(newState);
     }, 300),
     []
@@ -71,7 +81,7 @@ export default function Orders() {
 
   const filterFunction = (item: Order) => {
     const status = item.status;
-    const orderStatusKeys = Object.keys(OrderStatus) as Array<keyof typeof OrderStatus>;
+    const orderStatusKeys = Object.keys(OrderStatus) as [keyof typeof OrderStatus];
     const statusKey = orderStatusKeys.find(key => OrderStatus[key] === status);
     if (statusKey) {
       return filter[statusKey];
@@ -96,7 +106,7 @@ export default function Orders() {
       <Typography gutterBottom variant="h5" component="h2">Мои заказы</Typography>      
       <Box sx={{ display: 'flex', flexDirection:'column' }}>
         <FormControl variant="standard" sx={{ m: 1, mb: 1, maxWidth: 175 }} size="small" >
-          <InputLabel id="demo-select-small-label">Сортировать по сумме заказа</InputLabel>
+          <InputLabel id="demo-select-small-label">Сортировать по&nbsp;сумме заказа</InputLabel>
           <Select
             labelId="demo-select-small-label"
             id="demo-select-small"
@@ -104,8 +114,8 @@ export default function Orders() {
             label="price"
             onChange={handleSortChange}
           > 
-            <MenuItem value={'ascending'}>По возрастанию</MenuItem>
-            <MenuItem value={'descending'}>По убыванию</MenuItem>
+            <MenuItem value={'ascending'}>По&nbsp;возрастанию</MenuItem>
+            <MenuItem value={'descending'}>По&nbsp;убыванию</MenuItem>
           </Select>
         </FormControl>
         <FormControl sx={{ m: 3, ml:0 }} component="fieldset" variant="standard" >

@@ -4,7 +4,7 @@ import {Box, Modal, Typography, TextField, Button, Alert } from '@mui/material';
 import { Check as CheckIcon } from '@mui/icons-material';
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute' as const,
   display: 'flex',
   flexDirection: 'column',
   top: '50%',
@@ -21,7 +21,7 @@ const style = {
 interface Props {
   onClose: () => void;
   isOpen: boolean;
-  fetcher: FetcherWithComponents<any>;
+  fetcher: FetcherWithComponents<never>;
   state: 'loading' | 'idle' | null;
 }
 

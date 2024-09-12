@@ -20,18 +20,18 @@ export default function OrderList(props: Props) {
   const [advertisementsData, setAdvertisementsData] = useState<Advertisement[]>([]);
   const [abortController, setAbortController] = useState<AbortController | null>(null);
 
-  const handleModalOpen = async (ads: number[]) => {
+  const handleModalOpen = async (ads: string[]) => {
     setModalOpen(true);
     setLoading(true);
 
     const controller = new AbortController();
     setAbortController(controller);
 
-    getMultipleAdvertisements(ads, controller.signal)
+    await getMultipleAdvertisements(ads, controller.signal)
       .then((data) => {
         setAdvertisementsData(data);
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         if (error.name !== 'AbortError') {
           console.error('Error fetching product data:', error);
         }

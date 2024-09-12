@@ -1,4 +1,4 @@
-export function throttle<T extends (...args: any[]) => void>(func: T, limit: number) {
+export function throttle<T extends (...args: never[]) => void>(func: T, limit: number) {
   let lastFunc: ReturnType<typeof setTimeout>;
   let lastRan: number;
 

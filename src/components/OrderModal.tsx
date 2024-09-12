@@ -13,7 +13,7 @@ interface Props {
 }
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute' as const,
   display: 'flex',
   flexWrap: 'wrap',
   top: '50%',

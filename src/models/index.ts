@@ -1,4 +1,4 @@
-export type Advertisement = {
+export interface Advertisement {
   /* Уникальный идентификатор. */
   id: string;
   /* Название. */
@@ -35,7 +35,7 @@ export type OrderStatusKeyType = keyof typeof OrderStatus;
 
 type OrderItem = Advertisement & { count: number; };
 
-export type Order = {
+export interface Order {
   /* Уникальный идентификатор. */
   id: string;
   /* Статус. */
@@ -45,7 +45,7 @@ export type Order = {
   /* Дата и время завершения. */
   finishedAt?: string;
   /* Товары в заказе. */
-  items: Array<OrderItem>;
+  items: OrderItem[];
   /* Способ доставки(Почта, СДЭК...) */
   deliveryWay: string;
   /* Сумма заказа */
@@ -54,11 +54,11 @@ export type Order = {
 
 export type OrdersList = Order[];
 
-type Image = {
-  /* Уникальный идентификатор. */
-  id: number;
-  /* Ссылка. */
-  url: string;
-  /* Название. */
-  name: string;
-}
+// interface Image {
+//   /* Уникальный идентификатор. */
+//   id: number;
+//   /* Ссылка. */
+//   url: string;
+//   /* Название. */
+//   name: string;
+// }

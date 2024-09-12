@@ -30,7 +30,7 @@ export default function AdCard(props: Props) {
         <CardMedia
           component="img"
           height="140"
-          image={imageUrl || placeholderImage}
+          image={imageUrl ?? placeholderImage}
           alt={name}
           sx={{backgroundColor: color}}
         />
@@ -42,8 +42,8 @@ export default function AdCard(props: Props) {
             <CurrencyRuble fontSize='inherit'/>{price}
           </Typography>
           <Typography variant="body2" gutterBottom display={'flex'} gap={1}>
-            <span style={spanWithIconStyle}><Visibility fontSize='inherit' color='action'/><span className='sr-only'>Число просмотров</span> {views}</span>
-            <span style={spanWithIconStyle}><Favorite fontSize='inherit' color='action' /><span className='sr-only'>Число лайков</span> {likes}</span>
+            <span style={spanWithIconStyle}><Visibility fontSize='inherit' color='action'/><span className='sr-only'>Число просмотров</span>&nbsp;{views}</span>
+            <span style={spanWithIconStyle}><Favorite fontSize='inherit' color='action' /><span className='sr-only'>Число лайков</span>&nbsp;{likes}</span>
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -15,7 +15,7 @@ export default function Advertisements() {
   const { items, page: initialPage, limit: initialLimit } = useLoaderData() as loaderData;
   const [limit, setLimit] = useState(initialLimit);
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [_, setSearchParams] = useSearchParams();
+  const setSearchParams = useSearchParams()[1];
   const [modalOpen, setModalOpen] = useState(false);
   const [uploadingState, setUploadingState] = useState<'loading' | 'idle' | null >(null);
   const fetcher = useFetcher();
@@ -54,7 +54,7 @@ export default function Advertisements() {
 
   useEffect(() => {
     setSearchParams({ page: currentPage.toString(), limit: limit.toString() });
-  }, [limit, currentPage])
+  }, [limit, currentPage, setSearchParams])
 
   return (
     <>

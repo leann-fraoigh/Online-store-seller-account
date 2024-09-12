@@ -22,11 +22,11 @@ export async function action({ request }: ActionFunctionArgs) {
       await postAdvertisement(advertisement);
       return redirect('/advertisements');
     }
-    case "DELETE": {
-      return;
-    }
+    // case "DELETE": {
+    //   return;
+    // }
     default: {
-      throw new Response("", { status: 405 });
+      throw new Error('Method not allowed');
     }
   }
 }

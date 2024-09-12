@@ -1,7 +1,7 @@
 import { getOrders } from "../../api/get-orders";
 import { OrdersList } from '../../models';
 
-export type loaderData = {
+export interface loaderData {
   items: OrdersList,
 }
 

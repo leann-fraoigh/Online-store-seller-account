@@ -8,8 +8,8 @@ export async function getAdvertisementsByRange(start?: number, limit?: number): 
     apiUrl.searchParams.set('_limit', limit.toString());
   }
   const response = await fetch(apiUrl);
-
-  const responseJson = await response.json();
+  // TODO: Проверить типизацию
+  const responseJson = await response.json() as AdvertisementList;
   // if (!response.ok) {
   //   return rejectWithValueHandler(responseJson);
   // }
